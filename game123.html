@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>game</title>
+<style>
+img {width:35px;height:35px;position:absolute}
+</style>
+</head>
+<body id = "thebody">
+<h1>Find The Missing Face</h1>
+<script>
+var thebody=document.getElementById("thebody");
+var u=0,l=0,j=5;
+function facegen(nof) {
+var i;
+var thediv=document.createElement("div");
+thediv.style.top=100+"px";
+thediv.style.width=500 + "px";
+thediv.style.height=500 +"px";
+thediv.style.position="absolute";
+thebody.appendChild(thediv);
+for (i=0;i<nof;i++)
+{
+var k=Math.random()*465;
+var p=Math.random()*465;
+var theimg = document.createElement("img");
+theimg.src="smile.png"
+theimg.style.left=k;
+theimg.style.top=p;
+thediv.appendChild(theimg);
+}
+var the_div1 = thediv.cloneNode(true);
+the_div1.removeChild(the_div1.lastChild);
+the_div1.style.left=510+"px";
+the_div1.style.borderLeft="1px solid black";
+thebody.appendChild(the_div1);
+thediv.lastChild.onclick=function jaiho() {
+event.stopPropagation();
+u++;
+if(confirm("You are Going To level "+(u+1)+"...."))
+{
+the_div1.parentNode.removeChild(the_div1);
+thediv.parentNode.removeChild(thediv);	
+j=j+5;
+facegen(j);
+}
+else{
+	alert("Game over, Your Score:"+u+".....bye");
+	thebody.onclick=null;
+	thediv.lastChild.onclick=null;
+	j=0;
+}
+}
+thebody.onclick=function exit1(){
+	if(u > l)
+	{
+		l=u;
+	}
+	j=0;
+	alert("Game over, Your score is"+u+"...bye\nMAX Score :"+l+"");
+	thebody.onclick=null;
+	thediv.lastChild.onclick=null;
+	if(confirm("You Wanna play again"))
+{
+	j=5;
+	u=0;
+	the_div1.parentNode.removeChild(the_div1);
+    thediv.parentNode.removeChild(thediv);	
+	facegen(j);
+}
+else{
+	alert("GOODBYE...");
+}
+}
+}
+facegen(j);
+</script>
+</body>
+</html>
